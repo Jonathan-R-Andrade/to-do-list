@@ -12,8 +12,12 @@ function pegarElementos() {
 
 // Seleciona uma tarefa da lista
 function selecioanarTarefa(event) {
+  const desselecionarTarefa = document.querySelector('.selecionada');
+  if (desselecionarTarefa !== null) {
+    desselecionarTarefa.classList.remove('selecionada');
+  }
   let tarefa = event.target;
-  tarefa.classList.add('selecionado');
+  tarefa.classList.add('selecionada');
 }
 
 // Adiciona uma tarefa clicando no botão
