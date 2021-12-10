@@ -16,8 +16,18 @@ function selecioanarTarefa(event) {
   if (desselecionarTarefa !== null) {
     desselecionarTarefa.classList.remove('selecionada');
   }
-  let tarefa = event.target;
+  const tarefa = event.target;
   tarefa.classList.add('selecionada');
+}
+
+// Risca uma tarefa marcando como completada e faz o inverso
+function tarefaCompletada(event) {
+  const tarefa = event.target;
+  if (tarefa.classList.contains('completed')) {
+    tarefa.classList.remove('completed');
+  } else {
+    tarefa.classList.add('completed');
+  }
 }
 
 // Adiciona uma tarefa clicando no botão
@@ -28,8 +38,9 @@ function adicionaTarefaBotao() {
   // Cria um li com o texto do input
   const li = document.createElement('li');
   li.innerText = tarefa;
-  // Adiciona um ouvinte para a li
+  // Adiciona ouvintes para a li
   li.addEventListener('click', selecioanarTarefa);
+  li.addEventListener('dblclick', tarefaCompletada);
   // Adiciona a li na lista de tarefas
   listaTarefas.appendChild(li);
 }
