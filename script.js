@@ -10,6 +10,12 @@ function pegarElementos() {
   listaTarefas = document.getElementById('lista-tarefas');
 }
 
+// Seleciona uma tarefa da lista
+function selecioanarTarefa(event) {
+  let tarefa = event.target;
+  tarefa.classList.add('selecionado');
+}
+
 // Adiciona uma tarefa clicando no botão
 function adicionaTarefaBotao() {
   // Pega o texto no input e depois limpa
@@ -18,6 +24,8 @@ function adicionaTarefaBotao() {
   // Cria um li com o texto do input
   const li = document.createElement('li');
   li.innerText = tarefa;
+  // Adiciona um ouvinte para a li
+  li.addEventListener('click', selecioanarTarefa);
   // Adiciona a li na lista de tarefas
   listaTarefas.appendChild(li);
 }
