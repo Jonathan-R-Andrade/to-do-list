@@ -3,6 +3,7 @@ let inputTextoTarefa;
 let botaoCriarTarefa;
 let listaTarefas;
 let botaoApagarTudo;
+let botaoApagaFinalizadas;
 
 // Pega os elementos da página após ser carregada
 function pegarElementos() {
@@ -10,6 +11,7 @@ function pegarElementos() {
   botaoCriarTarefa = document.getElementById('criar-tarefa');
   listaTarefas = document.getElementById('lista-tarefas');
   botaoApagarTudo = document.getElementById('apaga-tudo');
+  botaoApagaFinalizadas = document.getElementById('remover-finalizados');
 }
 
 // Seleciona uma tarefa da lista
@@ -59,11 +61,20 @@ function apagarTarefas() {
   listaTarefas.innerHTML = '';
 }
 
+// Apaga todas as tarefas finalizadas da lista
+function apagarTarefasFinalizadas() {
+  const tarefasFinalizadas = document.getElementsByClassName('completed');
+  for (let i = tarefasFinalizadas.length - 1; i >= 0; i -= 1) {
+    tarefasFinalizadas[i].remove();
+  }
+}
+
 // Adiciona ouvintes nos elementos
 function adicionaOuvinte() {
   botaoCriarTarefa.addEventListener('click', adicionaTarefaBotao);
   inputTextoTarefa.addEventListener('keypress', adicionaTarefaEnter);
   botaoApagarTudo.addEventListener('click', apagarTarefas);
+  botaoApagaFinalizadas.addEventListener('click', apagarTarefasFinalizadas);
 }
 
 // Função executada após carregar a página para fazer as ações necessárias
