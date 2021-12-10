@@ -2,12 +2,14 @@
 let inputTextoTarefa;
 let botaoCriarTarefa;
 let listaTarefas;
+let botaoApagarTudo;
 
 // Pega os elementos da página após ser carregada
 function pegarElementos() {
   inputTextoTarefa = document.getElementById('texto-tarefa');
   botaoCriarTarefa = document.getElementById('criar-tarefa');
   listaTarefas = document.getElementById('lista-tarefas');
+  botaoApagarTudo = document.getElementById('apaga-tudo');
 }
 
 // Seleciona uma tarefa da lista
@@ -52,10 +54,16 @@ function adicionaTarefaEnter(event) {
   }
 }
 
+// Apaga todas as tarefas da lista
+function apagarTarefas() {
+  listaTarefas.innerHTML = '';
+}
+
 // Adiciona ouvintes nos elementos
 function adicionaOuvinte() {
   botaoCriarTarefa.addEventListener('click', adicionaTarefaBotao);
   inputTextoTarefa.addEventListener('keypress', adicionaTarefaEnter);
+  botaoApagarTudo.addEventListener('click', apagarTarefas);
 }
 
 // Função executada após carregar a página para fazer as ações necessárias

@@ -17,7 +17,7 @@ body {
   background-color: rgb(0 , 30 , 70);
 }
 
-h1 {
+#titulo {
   margin: 10px auto;
   width: max-content;
   height: 50px;
@@ -46,10 +46,26 @@ h1 {
   margin: 15px auto;
 }
 
+#lista-tarefas {
+  margin: 20px;
+}
+
+#lista-tarefas li:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
 .selecionada {
   background-color: gray;
 }
 
 .completed {
   text-decoration: line-through solid black;
+}
+
+.botao {
+  padding: 3px 5px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
 }
