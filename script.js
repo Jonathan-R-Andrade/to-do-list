@@ -1,17 +1,27 @@
+// IDs dos elementos
+const ID_LISTA_TAREFAS = 'lista-tarefas';
+const ID_TEXTO_TAREFA = 'texto-tarefa';
+const ID_CRIAR_TAREFA = 'criar-tarefa';
+const ID_APAGAR_TUDO = 'apaga-tudo';
+const ID_REMOVER_FINALIZADOS = 'remover-finalizados';
+const ID_SALVAR_TAREFAS = 'salvar-tarefas';
+
 // Declarando elementos
 let inputTextoTarefa;
 let botaoCriarTarefa;
 let listaTarefas;
 let botaoApagarTudo;
 let botaoApagaFinalizadas;
+let botaoSalvarLista;
 
 // Pega os elementos da página após ser carregada
 function pegarElementos() {
-  inputTextoTarefa = document.getElementById('texto-tarefa');
-  botaoCriarTarefa = document.getElementById('criar-tarefa');
-  listaTarefas = document.getElementById('lista-tarefas');
-  botaoApagarTudo = document.getElementById('apaga-tudo');
-  botaoApagaFinalizadas = document.getElementById('remover-finalizados');
+  inputTextoTarefa = document.getElementById(ID_TEXTO_TAREFA);
+  botaoCriarTarefa = document.getElementById(ID_CRIAR_TAREFA);
+  listaTarefas = document.getElementById(ID_LISTA_TAREFAS);
+  botaoApagarTudo = document.getElementById(ID_APAGAR_TUDO);
+  botaoApagaFinalizadas = document.getElementById(ID_REMOVER_FINALIZADOS);
+  botaoSalvarLista = document.getElementById(ID_SALVAR_TAREFAS);
 }
 
 // Seleciona uma tarefa da lista
@@ -69,19 +79,63 @@ function apagarTarefasFinalizadas() {
   }
 }
 
+// Salva a lista no armazenamento local
+function salvarLista() {
+  const arrLista = [];
+  const tarefas = document.querySelectorAll('#lista-tarefas li');
+  for (let i = 0; i < tarefas.length; i += 1) {
+    const completada = tarefas[i].classList.contains('completed');
+    const tarefa = tarefas[i].innerText;
+    const arrTarefa = [tarefa, completada];
+    arrLista.push(arrTarefa);
+  }
+  window.localStorage.setItem(ID_LISTA_TAREFAS, JSON.stringify(arrLista));
+}
+
+// Adiciona tarefa salva no armazenamento local
+function adicionaTarefaSalva(tarefa) {
+  // Cria um li com o texto
+  const li = document.createElement('li');
+  li.innerText = [tarefa[0]];
+  // Marca a tarefa como concluida ou não
+  if (tarefa[1]) {
+    li.classList.add('completed');
+  }
+  // Adiciona ouvintes para a li
+  li.addEventListener('click', selecioanarTarefa);
+  li.addEventListener('dblclick', tarefaCompletada);
+  // Adiciona a li na lista de tarefas
+  listaTarefas.appendChild(li);
+}
+
+// Carrega as tarefas salvas no armazenamento local
+function cerregarTarefas() {
+  let tarefas = window.localStorage.getItem(ID_LISTA_TAREFAS);
+  tarefas = JSON.parse(tarefas);
+  if (tarefas !== null) {
+    for (let i = 0; i < tarefas.length; i += 1) {
+      adicionaTarefaSalva(tarefas[i]);
+    }
+  }
+}
+
 // Adiciona ouvintes nos elementos
-function adicionaOuvinte() {
+function adicionaOuvintes() {
   botaoCriarTarefa.addEventListener('click', adicionaTarefaBotao);
   inputTextoTarefa.addEventListener('keypress', adicionaTarefaEnter);
   botaoApagarTudo.addEventListener('click', apagarTarefas);
   botaoApagaFinalizadas.addEventListener('click', apagarTarefasFinalizadas);
+  botaoSalvarLista.addEventListener('click', salvarLista);
 }
 
 // Função executada após carregar a página para fazer as ações necessárias
 function fazerAcoes() {
   // Pega os elementos
   pegarElementos();
-  adicionaOuvinte();
+  // Adiciona ouvintes aos elementos
+  adicionaOuvintes();
+  // Carrega tarefas salvas no armazenamento local
+  cerregarTarefas();
 }
 
 window.onload = fazerAcoes;
