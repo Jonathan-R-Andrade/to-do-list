@@ -5,6 +5,11 @@ const ID_CRIAR_TAREFA = 'criar-tarefa';
 const ID_APAGAR_TUDO = 'apaga-tudo';
 const ID_REMOVER_FINALIZADOS = 'remover-finalizados';
 const ID_SALVAR_TAREFAS = 'salvar-tarefas';
+const ID_MOVER_CIMA = 'mover-cima';
+const ID_MOVER_BAIXO = 'mover-baixo';
+
+// Classe do elemento
+const CLASSE_SELECIONADA = 'selecionada';
 
 // Declarando elementos
 let inputTextoTarefa;
@@ -13,6 +18,8 @@ let listaTarefas;
 let botaoApagarTudo;
 let botaoApagaFinalizadas;
 let botaoSalvarLista;
+let botaoMoverCima;
+let botaoMoverBaixo;
 
 // Pega os elementos da página após ser carregada
 function pegarElementos() {
@@ -22,16 +29,18 @@ function pegarElementos() {
   botaoApagarTudo = document.getElementById(ID_APAGAR_TUDO);
   botaoApagaFinalizadas = document.getElementById(ID_REMOVER_FINALIZADOS);
   botaoSalvarLista = document.getElementById(ID_SALVAR_TAREFAS);
+  botaoMoverCima = document.getElementById(ID_MOVER_CIMA);
+  botaoMoverBaixo = document.getElementById(ID_MOVER_BAIXO);
 }
 
 // Seleciona uma tarefa da lista
 function selecioanarTarefa(event) {
-  const desselecionarTarefa = document.querySelector('.selecionada');
+  const desselecionarTarefa = document.querySelector('.'.concat(CLASSE_SELECIONADA));
   if (desselecionarTarefa !== null) {
-    desselecionarTarefa.classList.remove('selecionada');
+    desselecionarTarefa.classList.remove(CLASSE_SELECIONADA);
   }
   const tarefa = event.target;
-  tarefa.classList.add('selecionada');
+  tarefa.classList.add(CLASSE_SELECIONADA);
 }
 
 // Risca uma tarefa marcando como completada e faz o inverso
@@ -119,6 +128,28 @@ function cerregarTarefas() {
   }
 }
 
+// Move a tarefa selecionada para cima
+function moverCima() {
+  const tarefa = document.querySelector('.'.concat(CLASSE_SELECIONADA));
+  if (tarefa !== null) {
+    const tarefaCima = tarefa.previousElementSibling;
+    if (tarefaCima !== null) {
+      tarefa.insertAdjacentElement('afterend', tarefaCima);
+    }
+  }
+}
+
+// Move a tarefa selecionada para baixo
+function moverBaixo() {
+  const tarefa = document.querySelector('.'.concat(CLASSE_SELECIONADA));
+  if (tarefa !== null) {
+    const tarefaBaixo = tarefa.nextElementSibling;
+    if (tarefaBaixo !== null) {
+      tarefa.insertAdjacentElement('beforebegin', tarefaBaixo);
+    }
+  }
+}
+
 // Adiciona ouvintes nos elementos
 function adicionaOuvintes() {
   botaoCriarTarefa.addEventListener('click', adicionaTarefaBotao);
@@ -126,6 +157,8 @@ function adicionaOuvintes() {
   botaoApagarTudo.addEventListener('click', apagarTarefas);
   botaoApagaFinalizadas.addEventListener('click', apagarTarefasFinalizadas);
   botaoSalvarLista.addEventListener('click', salvarLista);
+  botaoMoverCima.addEventListener('click', moverCima);
+  botaoMoverBaixo.addEventListener('click', moverBaixo);
 }
 
 // Função executada após carregar a página para fazer as ações necessárias
