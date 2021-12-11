@@ -7,6 +7,7 @@ const ID_REMOVER_FINALIZADOS = 'remover-finalizados';
 const ID_SALVAR_TAREFAS = 'salvar-tarefas';
 const ID_MOVER_CIMA = 'mover-cima';
 const ID_MOVER_BAIXO = 'mover-baixo';
+const ID_REMOVER = 'remover-selecionado';
 
 // Classe do elemento
 const CLASSE_SELECIONADA = 'selecionada';
@@ -20,6 +21,7 @@ let botaoApagaFinalizadas;
 let botaoSalvarLista;
 let botaoMoverCima;
 let botaoMoverBaixo;
+let botaoRemoverSelecionado;
 
 // Pega os elementos da página após ser carregada
 function pegarElementos() {
@@ -31,6 +33,7 @@ function pegarElementos() {
   botaoSalvarLista = document.getElementById(ID_SALVAR_TAREFAS);
   botaoMoverCima = document.getElementById(ID_MOVER_CIMA);
   botaoMoverBaixo = document.getElementById(ID_MOVER_BAIXO);
+  botaoRemoverSelecionado = document.getElementById(ID_REMOVER);
 }
 
 // Seleciona uma tarefa da lista
@@ -150,6 +153,14 @@ function moverBaixo() {
   }
 }
 
+// Remove tarefa selecionada
+function removerTarefa() {
+  const tarefa = document.querySelector('.'.concat(CLASSE_SELECIONADA));
+  if (tarefa !== null) {
+    tarefa.remove();
+  }
+}
+
 // Adiciona ouvintes nos elementos
 function adicionaOuvintes() {
   botaoCriarTarefa.addEventListener('click', adicionaTarefaBotao);
@@ -159,6 +170,7 @@ function adicionaOuvintes() {
   botaoSalvarLista.addEventListener('click', salvarLista);
   botaoMoverCima.addEventListener('click', moverCima);
   botaoMoverBaixo.addEventListener('click', moverBaixo);
+  botaoRemoverSelecionado.addEventListener('click', removerTarefa);
 }
 
 // Função executada após carregar a página para fazer as ações necessárias

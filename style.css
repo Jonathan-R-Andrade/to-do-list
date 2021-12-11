@@ -28,7 +28,7 @@ body {
 }
 
 #conteiner-tarefas {
-  width: max-content;
+  width: 80%;
   margin: 20px auto;
   padding: 10px 50px;
   background-color: white;
@@ -43,7 +43,7 @@ body {
 
 #adicionar-tarefa {
   width: max-content;
-  margin: 15px auto;
+  margin: 15px auto 10px;
 }
 
 #lista-tarefas {
@@ -53,6 +53,11 @@ body {
 #lista-tarefas li:hover {
   background-color: gray;
   cursor: pointer;
+}
+
+#botoes {
+  margin: auto;
+  width: max-content;
 }
 
 .selecionada {
