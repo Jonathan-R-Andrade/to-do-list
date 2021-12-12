@@ -27,10 +27,14 @@ body {
   border-radius: 50px;
 }
 
+#titulo:hover {
+  text-decoration: line-through solid black;
+}
+
 #conteiner-tarefas {
   width: 80%;
-  margin: 20px auto;
-  padding: 10px 50px;
+  margin: 51px auto 10px;
+  padding: 10px 50px 40px;
   background-color: white;
   border: solid 3px rgb(0 , 30 , 70);
   border-radius: 30px;
@@ -39,25 +43,57 @@ body {
 #funcionamento {
   margin: 5px;
   font-style: italic;
+  color: grey;
 }
 
 #adicionar-tarefa {
+  position: fixed;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
   width: max-content;
-  margin: 15px auto 10px;
+  background-color: grey;
+  padding: 7px;
+  border-radius: 20px;
+}
+
+#texto-tarefa {
+  padding: 2px;
+  border-radius: 10px;
+  border: white solid 2px;
+  outline: 0;
+}
+
+#texto-tarefa:focus {
+  border: turquoise solid 2px;
+  border-radius: 10px;
 }
 
 #lista-tarefas {
+  list-style-position: inside;
   margin: 20px;
 }
 
+#lista-tarefas li {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border-bottom: blue solid 1px;
+}
+
 #lista-tarefas li:hover {
-  background-color: gray;
+  background-color: rgb(200 , 200 , 200);
   cursor: pointer;
 }
 
 #botoes {
-  margin: auto;
+  position: fixed;
   width: max-content;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: grey;
+  padding: 10px;
+  border-radius: 20px;
 }
 
 .selecionada {
@@ -66,11 +102,48 @@ body {
 
 .completed {
   text-decoration: line-through solid black;
+  color: rgb(100 , 100 , 100);
 }
 
 .botao {
-  padding: 3px 5px;
+  font-family: sans-serif, arial;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin: 0 2px;
   border-radius: 10px;
-  font-weight: 700;
+  font-weight: 900;
   cursor: pointer;
+  border: none;
+  box-shadow: 1px 1px 1px 1px rgb(50 , 50 , 50);
+  transition: box-shadow 100ms ease, transform 100ms ease;
+}
+
+.botao:active {
+  box-shadow: inset 1px 1px 1px 1px rgb(50 , 50 , 50);
+  transform: translate(1px , 1px);
+}
+
+#criar-tarefa , #mover-cima , #mover-baixo {
+  background-color: turquoise;
+}
+
+#criar-tarefa:hover , #mover-cima:hover , #mover-baixo:hover {
+  background-color: rgb(50 , 200 , 190);
+}
+
+#remover-selecionado , #apaga-tudo , #remover-finalizados {
+  background-color: red;
+  color: white;
+}
+
+#remover-selecionado:hover , #apaga-tudo:hover , #remover-finalizados:hover {
+  background-color: rgb(200 , 0 , 0);
+}
+
+#salvar-tarefas {
+  background-color: rgb(0 , 200 , 0);
+}
+
+#salvar-tarefas:hover {
+  background-color: rgb(0 , 150 , 0);
 }
