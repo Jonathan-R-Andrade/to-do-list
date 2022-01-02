@@ -56,10 +56,22 @@ function tarefaCompletada(event) {
   }
 }
 
+// Verifica se a tarefa não está vazia ou com apenas espaços
+function verifcarTarefa(tarefa) {
+  const temp = tarefa.replace(/ /g, '');
+  if (temp === '') {
+    return false;
+  }
+  return true;
+}
+
 // Adiciona uma tarefa clicando no botão
 function adicionaTarefaBotao() {
   // Pega o texto no input e depois limpa
   const tarefa = inputTextoTarefa.value;
+  if (!verifcarTarefa(tarefa)) {
+    return;
+  }
   inputTextoTarefa.value = '';
   // Cria um li com o texto do input
   const li = document.createElement('li');
